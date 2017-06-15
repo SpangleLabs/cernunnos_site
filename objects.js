@@ -23,7 +23,25 @@ function ListObj() {
 
     this.addCategory = function (category) {
         this.categories.push(category);
-    }
+    };
+
+    this.setViewDates = function (dates) {
+        this.viewDates = dates;
+        if(dates) {
+            $(".cer-category-date").show();
+        } else {
+            $(".cer-category-date").hide();
+        }
+    };
+
+    this.setViewTags = function (tags) {
+        this.viewTags = tags;
+        if(tags) {
+            $(".cer-category-tags").show();
+        } else {
+            $(".cer-category-tags").hide();
+        }
+    };
 }
 
 function CategoryObj(categoryData) {
