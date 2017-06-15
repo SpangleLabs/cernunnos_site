@@ -14,7 +14,8 @@ function ListObj() {
 
     var __construct = function () {
         $.get(config.apiUrl + "/categories/", function (data) {
-            data.forEach(function (category) {
+            data.forEach(function (categoryData) {
+                var category = new CategoryObj(categoryData);
                 this.addCategory(category);
             })
         })
@@ -25,12 +26,17 @@ function ListObj() {
     }
 }
 
-function CategoryObj() {
+function CategoryObj(categoryData) {
     this.subCategories = [];
     this.tasks = [];
+    this.name = "";
     this.addSubcategory = function (subCategory) {
 
-    }
+    };
+
+    var __construct = function (categoryData) {
+        this.name = categoryData.name;
+    }(categoryData);
 }
 
 function TaskObj() {
