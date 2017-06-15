@@ -1,24 +1,49 @@
 /**
  * Created by JCOA on 15/06/2017.
  */
-function ViewObj(){}
-ViewObj.prototype.list = ListObj;
-ViewObj.prototype.diary = DiaryObj;
 
-function ListObj(){}
-ListObj.prototype.categories = [CategoryObj];
+function ViewObj() {
+    this.list = new ListObj();
+    this.diary = new DiaryObj();
+}
 
-function CategoryObj(){}
-CategoryObj.prototype.subCategories = [CategoryObj];
-CategoryObj.prototype.tasks = [TaskObj];
-CategoryObj.prototype.addSubcategory = function (subCategory) {
+function ListObj() {
+    this.categories = [];
+    this.viewDates = true;
+    this.viewTags = true;
 
-};
+    var __construct = function () {
+        $.get(config.apiUrl + "/categories/", function (data) {
+            data.forEach(function (category) {
+                this.addCategory(category);
+            })
+        })
+    }();
 
-function TaskObj(){}
-TaskObj.prototype.name = "name";
+    this.addCategory = function (category) {
+        this.categories.push(category);
+    }
+}
 
-function DiaryObj(){}
-DiaryObj.prototype.days = [DiaryDayObj];
+function CategoryObj() {
+    this.subCategories = [];
+    this.tasks = [];
+    this.addSubcategory = function (subCategory) {
 
-function DiaryDayObj(){}
+    }
+}
+
+function TaskObj() {
+    this.name = "name";
+}
+
+function DiaryObj() {
+    this.days = [];
+    this.viewManual = true;
+    this.viewAuto = true;
+    //TODO init from API
+}
+
+function DiaryDayObj() {
+
+}
