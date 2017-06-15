@@ -23,8 +23,55 @@
 
         <div class="tabs-content" data-tabs-content="example-tabs">
             <div class="tabs-panel is-active" id="panel1">
-                <p>One</p>
-                <p>I'm going to be a todo list!</p>
+                <div class="row">
+                    <div class="medium-2 small-4 columns">
+                        <div class="switch small">
+                            <input class="switch-input" id="showTags" type="checkbox" name="showTags" checked>
+                            <label class="switch-paddle" for="showTags">
+                                <span class="show-for-sr">Show tags</span>
+                            </label>
+                        </div>
+                    </div>
+                    <div class="medium-4 small-8 columns">
+                        Show tags
+                    </div>
+                    <div class="medium-2 small-4 columns">
+                        <div class="switch small">
+                            <input class="switch-input" id="showDates" type="checkbox" name="showDates" checked>
+                            <label class="switch-paddle" for="showDates">
+                                <span class="show-for-sr">Show dates</span>
+                            </label>
+                        </div>
+                    </div>
+                    <div class="medium-4 small-8 columns">
+                        Show dates
+                    </div>
+                </div>
+                <ul class="vertical menu" data-accordion-menu>
+                    <li>
+                        <a href="#0">Item 1</a>
+                        <ul class="menu vertical nested">
+                            <li>
+                                <a href="#0">Item 1A</a>
+                                <ul class="menu vertical nested">
+                                    <li><a href="#0">Item 1Ai</a></li>
+                                    <li><a href="#0">Item 1Aii</a></li>
+                                    <li><a href="#0">Item 1Aiii</a></li>
+                                </ul>
+                            </li>
+                            <li><a href="#0">Item 1B</a></li>
+                            <li><a href="#0">Item 1C</a></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="#0">Item 2</a>
+                        <ul class="menu vertical nested">
+                            <li><a href="#0">Item 2A</a></li>
+                            <li><a href="#0">Item 2B</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="#0">Item 3</a></li>
+                </ul>
             </div>
             <div class="tabs-panel" id="panel2">
                 <p>Two</p>
