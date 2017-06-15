@@ -2,7 +2,6 @@
  * Created by JCOA on 15/06/2017.
  */
 function ViewObj(){}
-ViewObj.prototype.tab = "list";
 ViewObj.prototype.list = ListObj;
 ViewObj.prototype.diary = DiaryObj;
 
@@ -12,6 +11,9 @@ ListObj.prototype.categories = [CategoryObj];
 function CategoryObj(){}
 CategoryObj.prototype.subCategories = [CategoryObj];
 CategoryObj.prototype.tasks = [TaskObj];
+CategoryObj.prototype.addSubcategory = function (subCategory) {
+
+};
 
 function TaskObj(){}
 TaskObj.prototype.name = "name";
