@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="css/foundation.css">
     <link rel="stylesheet" href="css/app.css">
+    <link rel="stylesheet" href="index.css">
     <title>Cernunnos</title>
 </head>
 <body>
@@ -50,44 +51,6 @@
                 </div>
                 <!-- To do listing -->
                 <div id="cer-to-do-list">
-                    <div class="cer-category row align-justify" id="category-0">
-                        <div class="small-10 cer-category-name">
-                            Category name
-                        </div>
-                        <div class="small-2 shrink">
-                            <span class="cer-category-tags">
-                                🦌
-                            </span>
-                            <span class="cer-category-date">
-                                2017-06-15
-                            </span>
-                        </div>
-                    </div>
-                    <ul class="vertical menu" data-accordion-menu>
-                        <li>
-                            <a href="#">Item 1</a>
-                            <ul class="menu vertical nested">
-                                <li>
-                                    <a href="#0">Item 1A</a>
-                                    <ul class="menu vertical nested">
-                                        <li><a href="#0">Item 1Ai</a></li>
-                                        <li><a href="#0">Item 1Aii</a></li>
-                                        <li><a href="#0">Item 1Aiii</a></li>
-                                    </ul>
-                                </li>
-                                <li><a href="#0">Item 1B</a></li>
-                                <li><a href="#0">Item 1C</a></li>
-                            </ul>
-                        </li>
-                        <li>
-                            <a href="#0">Item 2</a>
-                            <ul class="menu vertical nested">
-                                <li><a href="#0">Item 2A</a></li>
-                                <li><a href="#0">Item 2B</a></li>
-                            </ul>
-                        </li>
-                        <li><a href="#0">Item 3</a></li>
-                    </ul>
                 </div>
             </div>
             <div class="tabs-panel" id="panel2">
@@ -112,6 +75,21 @@
     $("#showDates").change(function() {
         baseView.list.setViewDates($("#showDates").is(':checked'));
     })
+</script>
+<script type="text/template" data-template="cer-template-category">
+    <div class="cer-category row align-justify" id="category-${id}">
+        <div class="small-10 cer-category-name">
+            ${name}
+        </div>
+        <div class="small-2 shrink">
+            <span class="cer-category-tags">
+                ${tags}
+            </span>
+            <span class="cer-category-date">
+                ${date}
+            </span>
+        </div>
+    </div>
 </script>
 </body>
 </html>
