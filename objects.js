@@ -28,18 +28,18 @@ function ListObj() {
     this.setViewDates = function (dates) {
         this.viewDates = dates;
         if(dates) {
-            $(".cer-category-date").show();
+            $(".cer-category-date").show(200);
         } else {
-            $(".cer-category-date").hide();
+            $(".cer-category-date").hide(200);
         }
     };
 
     this.setViewTags = function (tags) {
         this.viewTags = tags;
         if(tags) {
-            $(".cer-category-tags").show();
+            $(".cer-category-tags").show(200);
         } else {
-            $(".cer-category-tags").hide();
+            $(".cer-category-tags").hide(200);
         }
     };
 }
