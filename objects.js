@@ -27,8 +27,8 @@ function ListObj() {
         var html = categoryTpl.map(render({
             "id": category.getCategoryId(),
             "name": category.getName(),
-            "date": "2017-06-15",
-            "tags": "🦌"
+            "date": "YYYY-MM-DD", //TODO
+            "tags": "🦌" //TODO
         })).join('');
         $("#cer-to-do-list").append(html);
     };
