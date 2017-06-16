@@ -31,6 +31,7 @@ function ListObj() {
             "tags": "🦌" //TODO
         })).join('');
         $("#cer-to-do-list").append(html);
+        $("#cer-category-"+category.getCategoryId()).data("obj", category);
     };
 
     this.setViewDates = function (dates) {
@@ -73,10 +74,30 @@ function CategoryObj(categoryData) {
     this.getCategoryId = function () {
         return this.categoryId;
     };
+
+    this.expand = function () {
+        console.log("Request to expand category "+this.categoryId);
+        get(config.apiUrl+"/categories/"+this.categoryId).then(function (data) {
+            console.log(data[0]);
+            data[0].sub_categories.forEach(function (subCategoryData) {
+                var subCategory = new CategoryObj(subCategoryData);
+                $("#cer-category-"+data[0].category_id).append("Cat="+subCategory.getName());
+            });
+            data[0].tasks.forEach(function (taskData) {
+                var task = new TaskObj(taskData);
+                $("#cer-category-"+data[0].category_id).append("Task="+task.getName());
+            })
+
+        });
+    }
 }
 
 function TaskObj() {
     this.name = "name";
+
+    this.getName = function () {
+        return this.name;
+    }
 }
 
 function DiaryObj() {
@@ -97,4 +118,21 @@ function getTemplate(name) {
 }
 function render(props) {
     return function(tok, i) { return (i % 2) ? props[tok] : tok; };
+}
+function get(url) {
+    return new Promise(function (resolve, reject) {
+        var req = new XMLHttpRequest();
+        req.open('GET', url);
+        req.onload = function () {
+            if (req.status === 200) {
+                resolve(JSON.parse(req.response));
+            } else {
+                reject(Error(req.statusText));
+            }
+        };
+        req.onerror = function () {
+            reject(Error("Network Error"));
+        };
+        req.send();
+    });
 }
