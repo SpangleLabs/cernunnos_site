@@ -76,9 +76,7 @@ function CategoryObj(categoryData) {
     };
 
     this.expand = function () {
-        console.log("Request to expand category "+this.categoryId);
         get(config.apiUrl+"/categories/"+this.categoryId).then(function (data) {
-            console.log(data[0]);
             data[0].sub_categories.forEach(function (subCategoryData) {
                 var subCategory = new CategoryObj(subCategoryData);
                 $("#cer-category-"+data[0].category_id).append("Cat="+subCategory.getName());
@@ -86,8 +84,7 @@ function CategoryObj(categoryData) {
             data[0].tasks.forEach(function (taskData) {
                 var task = new TaskObj(taskData);
                 $("#cer-category-"+data[0].category_id).append("Task="+task.getName());
-            })
-
+            });
         });
     }
 }
