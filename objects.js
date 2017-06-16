@@ -12,17 +12,25 @@ function ListObj() {
     this.viewDates = true;
     this.viewTags = true;
 
-    var __construct = function () {
+    var __construct = function (thi) {
         $.get(config.apiUrl + "/categories/", function (data) {
             data.forEach(function (categoryData) {
                 var category = new CategoryObj(categoryData);
-                this.addCategory(category);
+                thi.addCategory(category);
             })
         })
-    }();
+    }(this);
 
     this.addCategory = function (category) {
         this.categories.push(category);
+        var categoryTpl = getTemplate("cer-template-category");
+        var html = categoryTpl.map(render({
+            "id": category.getCategoryId(),
+            "name": category.getName(),
+            "date": "2017-06-15",
+            "tags": "🦌"
+        })).join('');
+        $("#cer-to-do-list").append(html);
     };
 
     this.setViewDates = function (dates) {
@@ -45,6 +53,7 @@ function ListObj() {
 }
 
 function CategoryObj(categoryData) {
+    this.categoryId = 0;
     this.subCategories = [];
     this.tasks = [];
     this.name = "";
@@ -52,9 +61,18 @@ function CategoryObj(categoryData) {
 
     };
 
-    var __construct = function (categoryData) {
-        this.name = categoryData.name;
-    }(categoryData);
+    var __construct = function (thi, categoryData) {
+        thi.categoryId = categoryData.category_id;
+        thi.name = categoryData.name;
+    }(this, categoryData);
+
+    this.getName = function () {
+        return this.name;
+    };
+
+    this.getCategoryId = function () {
+        return this.categoryId;
+    };
 }
 
 function TaskObj() {
@@ -70,4 +88,13 @@ function DiaryObj() {
 
 function DiaryDayObj() {
 
+}
+
+
+// Useful methods
+function getTemplate(name) {
+    return $('script[data-template="'+name+'"]').text().split(/\${(.+?)}/g);
+}
+function render(props) {
+    return function(tok, i) { return (i % 2) ? props[tok] : tok; };
 }

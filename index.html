@@ -113,5 +113,20 @@
         baseView.list.setViewDates($("#showDates").is(':checked'));
     })
 </script>
+<script type="text/template" data-template="cer-template-category">
+    <div class="cer-category row align-justify" id="category-${id}">
+        <div class="small-10 cer-category-name">
+            ${name}
+        </div>
+        <div class="small-2 shrink">
+            <span class="cer-category-tags">
+                ${tags}
+            </span>
+            <span class="cer-category-date">
+                ${date}
+            </span>
+        </div>
+    </div>
+</script>
 </body>
 </html>
