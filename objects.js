@@ -58,9 +58,8 @@ function CategoryObj(categoryData) {
     this.subCategories = [];
     this.tasks = [];
     this.name = "";
-    this.addSubcategory = function (subCategory) {
-
-    };
+    this.isExpanded = false;
+    this.isLoaded = false;
 
     var __construct = function (thi, categoryData) {
         thi.categoryId = categoryData.category_id;
@@ -76,17 +75,43 @@ function CategoryObj(categoryData) {
     };
 
     this.expand = function () {
-        get(config.apiUrl+"/categories/"+this.categoryId).then(function (data) {
-            data[0].sub_categories.forEach(function (subCategoryData) {
-                var subCategory = new CategoryObj(subCategoryData);
-                $("#cer-category-"+data[0].category_id).append("Cat="+subCategory.getName());
+        var self = this;
+        if(!this.isLoaded) {
+            get(config.apiUrl + "/categories/" + this.categoryId).then(function (data) {
+                data[0].sub_categories.forEach(function (subCategoryData) {
+                    var subCategory = new CategoryObj(subCategoryData)
+                    self.addSubcategory(subCategory);
+                });
+                data[0].tasks.forEach(function (taskData) {
+                    var task = new TaskObj(taskData);
+                    $("#cer-category-" + data[0].category_id).append("Task=" + task.getName());
+                });
             });
-            data[0].tasks.forEach(function (taskData) {
-                var task = new TaskObj(taskData);
-                $("#cer-category-"+data[0].category_id).append("Task="+task.getName());
-            });
-        });
-    }
+            this.isLoaded = true;
+            this.isExpanded = true;
+            return;
+        }
+        if(this.isExpanded) {
+            $("#cer-category-"+this.categoryId+" .cer-subcategories").first().hide();
+            this.isExpanded = false;
+        } else {
+            $("#cer-category-"+this.categoryId+" .cer-subcategories").first().show();
+            this.isExpanded = true;
+        }
+    };
+
+    this.addSubcategory = function (subCategory) {
+        this.subCategories.push(subCategory);
+        var categoryTpl = getTemplate("cer-template-category");
+        var html = categoryTpl.map(render({
+            "id": subCategory.getCategoryId(),
+            "name": subCategory.getName(),
+            "date": "YYYY-MM-DD", //TODO
+            "tags": "🦌" //TODO
+        })).join('');
+        $("#cer-category-"+this.getCategoryId()+" .cer-subcategories").first().append(html);
+        $("#cer-category-"+subCategory.getCategoryId()).data("obj", subCategory);
+    };
 }
 
 function TaskObj() {

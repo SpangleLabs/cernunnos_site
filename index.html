@@ -50,7 +50,9 @@
                     </div>
                 </div>
                 <!-- To do listing -->
-                <div id="cer-to-do-list">
+                <div class="row">
+                    <div class="small-12 columns" id="cer-to-do-list">
+                    </div>
                 </div>
             </div>
             <div class="tabs-panel" id="panel2">
@@ -81,7 +83,7 @@
     });
 </script>
 <script type="text/template" data-template="cer-template-category">
-    <div class="cer-category row align-justify" id="cer-category-${id}">
+    <div class="row collapse align-justify cer-category" id="cer-category-${id}">
         <div class="small-10 cer-category-name">
             ${name}
         </div>
@@ -92,6 +94,8 @@
             <span class="cer-category-date">
                 ${date}
             </span>
+        </div>
+        <div class="small-12 columns cer-subcategories">
         </div>
     </div>
 </script>
