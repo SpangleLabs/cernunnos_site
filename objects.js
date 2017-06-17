@@ -76,7 +76,9 @@ function CategoryObj(categoryData) {
 
     this.expand = function () {
         var self = this;
+        var subcategorySelector = $("#cer-category-"+this.categoryId+" .cer-subcategories");
         if(!this.isLoaded) {
+            subcategorySelector.first().hide(200);
             get(config.apiUrl + "/categories/" + this.categoryId).then(function (data) {
                 data[0].sub_categories.forEach(function (subCategoryData) {
                     var subCategory = new CategoryObj(subCategoryData)
@@ -88,14 +90,15 @@ function CategoryObj(categoryData) {
                 });
             });
             this.isLoaded = true;
+            subcategorySelector.show(200);
             this.isExpanded = true;
             return;
         }
         if(this.isExpanded) {
-            $("#cer-category-"+this.categoryId+" .cer-subcategories").first().hide();
+            subcategorySelector.hide(200);
             this.isExpanded = false;
         } else {
-            $("#cer-category-"+this.categoryId+" .cer-subcategories").first().show();
+            subcategorySelector.show(200);
             this.isExpanded = true;
         }
     };

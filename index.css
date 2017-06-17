@@ -2,8 +2,10 @@
 
 }
 .cer-category {
-    background-color: #2ba6cb;
     margin-bottom: 5px;
+}
+.cer-category-header {
+    background-color: #2ba6cb;
     border-radius: 5px;
 }
 .cer-category-name {

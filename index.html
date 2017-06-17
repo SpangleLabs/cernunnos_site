@@ -77,25 +77,29 @@
     $("#showDates").change(function() {
         baseView.list.setViewDates($("#showDates").is(':checked'));
     });
-    $("#cer-to-do-list").on("click", ".cer-category", function() {
-        var categoryObj = $(this).data()["obj"];
+    $("#cer-to-do-list").on("click", ".cer-category-header", function() {
+        var categoryObj = $(this).closest(".cer-category").data()["obj"];
         categoryObj.expand();
     });
 </script>
 <script type="text/template" data-template="cer-template-category">
-    <div class="row collapse align-justify cer-category" id="cer-category-${id}">
-        <div class="small-10 cer-category-name">
-            ${name}
-        </div>
-        <div class="small-2 shrink">
-            <span class="cer-category-tags">
-                ${tags}
-            </span>
-            <span class="cer-category-date">
-                ${date}
-            </span>
+    <div class="row collapse cer-category" id="cer-category-${id}">
+        <div class="small-12">
+        <div class="row cer-category-header">
+            <div class="small-10 cer-category-name">
+                ${name}
+            </div>
+            <div class="small-2 shrink">
+                <span class="cer-category-tags">
+                    ${tags}
+                </span>
+                <span class="cer-category-date">
+                    ${date}
+                </span>
+            </div>
         </div>
         <div class="small-12 columns cer-subcategories">
+        </div>
         </div>
     </div>
 </script>
